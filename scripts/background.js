@@ -7,7 +7,7 @@ var timeout = false;
 refreshRate();
 setInterval(refreshRate, 3 * 60 * 1000);
 
-unction round(value, decimal){
+function round(value, decimal){
 	return Number.parseFloat(value).toFixed(10);
 }
 
