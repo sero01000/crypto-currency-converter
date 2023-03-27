@@ -77,15 +77,15 @@ function convertValueRecursive(value, from, to, callback) {
     callback({ status: "success", value: converted });
 }
 
-function getVersion() {
-    var details = chrome.app.getDetails();
-    return details.version;
-}
+// function getVersion() {
+//     var details = chrome.app.getDetails();
+//     return details.version;
+// }
 
-var currVersion = getVersion();
-var prevVersion = localStorage.getItem("version");
-if (currVersion != prevVersion) {
-    if (prevVersion != null) {
+// var currVersion = getVersion();
+// var prevVersion = localStorage.getItem("version");
+// if (currVersion != prevVersion) {
+//     if (prevVersion != null) {
         var currencies = [];
 
         for (var i = 0; i < MAX_CURRENCIES; i++) {
@@ -101,7 +101,7 @@ if (currVersion != prevVersion) {
         }
 
         localStorage.setItem("currencies", JSON.stringify(currencies));
-    }
+//     }
 
-    localStorage.setItem("version", currVersion);
-}
+//     localStorage.setItem("version", currVersion);
+// }
