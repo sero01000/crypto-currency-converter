@@ -1,10 +1,10 @@
 {
 	"manifest_version": 2,
-	"name": "Minimal Currency Converter",
+	"name": "Crypto Currency Converter",
 	"version": "0.9",
-	"description": "Multiple currency converter with real-time exchange rates and a minimalistic user interface.",
+	"description": "Daily rate crypto and fiat currency converter powered by exchangerate-api.com and api.coingecko.com. Fork of Currency Converter.",
 	"homepage_url": "https://github.com/OutisNemo/minimal-currency-converter",
-	"minimum_chrome_version": "18",
+
 	"browser_action": {
 	  "default_icon": "icons/icon.png",
 	  "default_title": "Minimal Currency Converter",
@@ -20,5 +20,9 @@
 	  "32": "icons/icon.png",
 	  "48": "icons/icon.png",
 	  "128": "icons/icon.png"
-	}
+	},
+	"permissions": [
+		"*://open.er-api.com/",
+		"*://api.coingecko.com/"
+	]
   }
