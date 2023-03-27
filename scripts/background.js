@@ -5,12 +5,10 @@ var gloabal_timer = null;
 var timeout = false;
 
 refreshRate();
-setInterval(refreshRate, 15 * 60 * 1000);
+setInterval(refreshRate, 3 * 60 * 1000);
 
-function round(value, decimal) {
-    var rounded = value * Math.pow(10, decimal);
-    rounded = Math.round(rounded);
-    return rounded / Math.pow(10, decimal);
+unction round(value, decimal){
+	return Number.parseFloat(value).toFixed(10);
 }
 
 function refreshRate() {
@@ -19,7 +17,7 @@ function refreshRate() {
 	var xhrCrypto = new XMLHttpRequest();
 
 	// Fiat currencies
-    xhrFiat.open("GET", "http://outisnemo.com/minimal-currency-converter/?" + Math.random() * 1000, true);
+    xhrFiat.open("GET", "https://open.er-api.com/v6/latest/USD", true);
     xhrFiat.onload = function () {
         timeout = false;
         clearTimeout(timer);
@@ -32,11 +30,18 @@ function refreshRate() {
     xhrFiat.send(null);
 
 	// Crypto currencies
-	xhrCrypto.open("GET", "https://blockchain.info/tobtc?currency=EUR&value=1", true);
+	xhrCrypto.open("GET", "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1", true);
 	xhrCrypto.onload = function () {
 		timeout = false;
 		clearTimeout(timer);
-		cache['BTC'] = parseFloat(xhrCrypto.responseText);
+		var response = JSON.parse(xhrFiat.responseText);
+
+		for(var key in response) {
+			try{
+				cache[response[key]['symbol'].toUpperCase()] = 1 / response[key]['current_price'];
+			}
+			catch(err){ continue; }
+		}
 	};
 	xhrCrypto.send(null);
 
