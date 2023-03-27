@@ -1,9 +1,8 @@
 # Crypto Currency Converter 
-[![Download](https://img.shields.io/badge/Chrome%20Web%20Store-download-yellow)](https://chrome.google.com/webstore/detail/meekoegodidgjomlhheckddffabnajpa)
 [![Download](https://img.shields.io/badge/Firefox%20Addons-Download-yellow)](https://addons.mozilla.org/ru/firefox/addon/crypto-currency-converter)
 [![Twitter](https://img.shields.io/twitter/url?style=social&url=https://addons.mozilla.org/ru/firefox/addon/crypto-currency-converter)](https://twitter.com/intent/tweet?text=Wow:&url=https://addons.mozilla.org/ru/firefox/addon/crypto-currency-converter)
 
-A Firefox extension for converting multiple crypto and fiat currencies with real-time exchange rates and a minimalistic user interface. Using the open-source APIs provided by [https://exchangerate-api.com/](https://exchangerate-api.com/) and [https://api.coingecko.com](https://api.coingecko.com).
+A Firefox extension for converting multiple crypto and fiat currencies with real-time exchange rates and a minimalistic user interface. Using the open-source APIs provided by [https://exchangerate-api.com/](https://open.er-api.com/)![exc](https://www.exchangerate-api.com/favicon-16x16.png) and [https://api.coingecko.com](https://api.coingecko.com)![coingecko](https://www.coingecko.com/favicon-16x16.png).
 
 ## Supported fiat currencies:
 - UAE Dirham
