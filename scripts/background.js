@@ -5,7 +5,7 @@ var gloabal_timer = null;
 var timeout = false;
 
 refreshRate();
-setInterval(refreshRate, 3 * 60 * 1000);
+setInterval(refreshRate, 15 * 60 * 1000);
 
 function round(value, decimal){
 	return Number.parseFloat(value).toFixed(10);
@@ -74,31 +74,20 @@ function convertValueRecursive(value, from, to, callback) {
     callback({ status: "success", value: converted });
 }
 
-// function getVersion() {
-//     var details = chrome.app.getDetails();
-//     return details.version;
-// }
 
-// var currVersion = getVersion();
-// var prevVersion = localStorage.getItem("version");
-// if (currVersion != prevVersion) {
-//     if (prevVersion != null) {
-        var currencies = [];
+var currencies = [];
 
-        for (var i = 0; i < MAX_CURRENCIES; i++) {
-            var currency = localStorage.getItem("currency" + i);
+for (var i = 0; i < MAX_CURRENCIES; i++) {
+    var currency = localStorage.getItem("currency" + i);
 
-            if (currency == undefined) {
-                if (i == 0) currency = "EUR";
-                else if (i == 1) currency = "USD";
-                else break;
-            }
+    if (currency == undefined) {
+        if (i == 0) currency = "EUR";
+        else if (i == 1) currency = "USD";
+        else break;
+    }
 
-            currencies[i] = currency;
-        }
+    currencies[i] = currency;
+}
 
-        localStorage.setItem("currencies", JSON.stringify(currencies));
-//     }
+localStorage.setItem("currencies", JSON.stringify(currencies));
 
-//     localStorage.setItem("version", currVersion);
-// }
