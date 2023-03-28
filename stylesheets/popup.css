@@ -26,9 +26,9 @@ input[type='password'],
 input[type='text'],
 input[type='url'],
 input:not([type]) {
-	-webkit-border-radius: 2px;
+	border-radius: 2px;
 	border: 1px solid #aaa;
-	font: -webkit-small-control;
+	font: small-control;
 	padding: 3px;
 	width: 120px;
 }
@@ -39,7 +39,7 @@ input:not([type]) {
 	min-width: 0;
 	top: 16px;
 	width: 16px;
-	-webkit-box-shadow: none;
+	box-shadow: none;
 	background-color: transparent;
 	background-repeat: no-repeat;
 	border: none;
@@ -49,4 +49,24 @@ input:not([type]) {
 
 .close-subpage:hover {
   background-image: url('/icons/IDR_CLOSE_BAR_H.png');
+}
+
+@media (prefers-color-scheme: dark) {
+
+    body {
+        background-color:#1c1b22;
+        color: #d8d5d5;
+    }
+
+	input[type='password'],input[type='text'],
+	input[type='url'],input:not([type]),
+	option:not(:checked) {
+		background: #484854;
+		color: #d8d5d5;
+		border: none;
+		outline: none;
+		border-top-style: hidden;
+		border-right-style: hidden;
+		border-left-style: hidden;
+	}
 }
