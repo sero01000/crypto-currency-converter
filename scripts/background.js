@@ -5,7 +5,7 @@ var gloabal_timer = null;
 var timeout = false;
 
 refreshRate();
-setInterval(refreshRate, 15 * 60 * 1000);
+setInterval(refreshRate, 3 * 60 * 1000);
 
 function round(value, decimal){
 	return Number.parseFloat(value).toFixed(10);
