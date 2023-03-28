@@ -4,6 +4,10 @@
 
 A Firefox extension for converting multiple crypto and fiat currencies with real-time exchange rates and a minimalistic user interface. Using the open-source APIs provided by [https://exchangerate-api.com/](https://open.er-api.com/)![exc](https://www.exchangerate-api.com/favicon-16x16.png) and [https://api.coingecko.com](https://api.coingecko.com)![coingecko](https://www.coingecko.com/favicon-16x16.png).
 
+## Screenshots:
+![dark](/screens/dark_mode.jpg?raw=true "Dark mode")
+![light](/screens/light_mode.jpg?raw=true "Light mode")
+
 ## Supported fiat currencies:
 - UAE Dirham
 - Afghan Afghani
