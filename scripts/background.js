@@ -5,7 +5,7 @@ var gloabal_timer = null;
 var timeout = false;
 
 refreshRate();
-setInterval(refreshRate, 3 * 60 * 1000);
+setInterval(refreshRate, 15 * 60 * 1000);
 
 function round(value, decimal){
 	return Number.parseFloat(value).toFixed(10);
@@ -29,19 +29,16 @@ function refreshRate() {
     };
     xhrFiat.send(null);
 
-	// Crypto currencies
+    // Crypto currencies
 	xhrCrypto.open("GET", "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1", true);
 	xhrCrypto.onload = function () {
 		timeout = false;
 		clearTimeout(timer);
-		var response = JSON.parse(xhrFiat.responseText);
-
-		for(var key in response) {
-			try{
-				cache[response[key]['symbol'].toUpperCase()] = 1 / response[key]['current_price'];
-			}
-			catch(err){ continue; }
-		}
+        var response2 = JSON.parse(xhrCrypto.responseText);
+        
+        for (var key in response2) {
+            cache[response2[key]['symbol'].toUpperCase()] = 1 / response2[key]['current_price'];
+        }
 	};
 	xhrCrypto.send(null);
 
