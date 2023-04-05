@@ -42,7 +42,8 @@ function addCurrency(init) {
     input_value.addEventListener("keyup", onValueChange, false);
 	input_value.addEventListener("paste", onPaste, false);
 	input_value.onclick = function() { this.setSelectionRange(0, this.value ? this.value.length : 0); }
-    input_value.onkeypress = function () { return onKeyPress(event) };
+    input_value.onkeypress = function () { return onKeyPress(event) };//'onkeypress' is deprecated
+    // input_value.addEventListener("keypress", (event) => {return onKeyPress(event)});
 
     var td_left = document.createElement("td");
     td_left.setAttribute("class", "paddingtd");
@@ -67,8 +68,21 @@ function addCurrency(init) {
 
     var tr = document.createElement("tr");
     tr.id = "trCurrency" + count_currencies;
+
+    var img = document.createElement('img');
+    img.id = "icon" + count_currencies;
+    img.width = "16";
+    img.height = "16";
+    img.src = 'https://www.coingecko.com/favicon-16x16.png';
+
+    var td_img = document.createElement("td");
+    td_img.setAttribute("class", "paddingtd");
+    td_img.appendChild(img);
+    
+    tr.appendChild(td_img);
     tr.appendChild(td_left);
     tr.appendChild(td_right);
+
 
     var container = document.getElementById("currency");
     container.appendChild(tr);
@@ -114,26 +128,41 @@ function update(id) {
 
     if (isNaN(value)) return;
 
+    var img = document.getElementById("icon" + id).src;
+
     localStorage.setItem("last_id", id);
     localStorage.setItem("last_value", value);
+    localStorage.setItem("last_img", img);
 
     var fromSelectCurrency = document.getElementById("currency" + id);
     var fromOptionCurrency =
         fromSelectCurrency.options[fromSelectCurrency.selectedIndex];
-    var from = fromOptionCurrency.value;
+    var from = fromOptionCurrency.value;//old cur
 
     for (i = 0; i < count_currencies; i++) {
-        if (id == i) continue;
-
-        var current_element = document.getElementById("value" + i);
-
         var toSelectCurrency = document.getElementById("currency" + i);
         var toOptionCurrency =
             toSelectCurrency.options[toSelectCurrency.selectedIndex];
-        var to = toOptionCurrency.value;
+        var to = toOptionCurrency.value;//new cur
+
+        var img_element = document.getElementById("icon" + i);
+        if (currenciesJSON[to] == undefined){
+            img_element.src = 'https://www.coingecko.com/favicon-16x16.png';
+        }else{
+            if (Object.keys(currenciesJSON[to]).includes('image')){
+                img_element.src = currenciesJSON[to].image;
+            }else{
+                console.error("undefined",currenciesJSON[to])
+                img_element.src = 'https://www.coingecko.com/favicon-16x16.png';
+            }
+        }
+
+        if (id == i) continue;
+        var current_element = document.getElementById("value" + i);
+
 
         if (from == to || value == "") current_element.value = value;
-        else convertValue(current_element, value, from, to);
+        else convertValue(current_element, img_element, value, from, to);
     }
 }
 
@@ -148,7 +177,7 @@ function setSelectedIndex(s, value) {
     }
 }
 
-function convertValue(element, value, from, to) {
+function convertValue(element, img_element, value, from, to) {
     document
         .getElementById("loading")
         .setAttribute("style", "visibility:visible;");
