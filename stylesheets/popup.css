@@ -1,21 +1,17 @@
-table
-{
+table {
 	padding: 0px;
 	border-spacing: 0px;
 }
 
-.paddingtd
-{
+.paddingtd {
 	padding: 1px 2px 1px 2px;
 }
 
-.width100
-{
+.width100 {
 	width: 100%;
 }
 
-.throbber 
-{
+.throbber {
 	background: url('/icons/throbber.svg');
 	display: inline-block;
 	height: 16px;
@@ -28,7 +24,7 @@ input[type='url'],
 input:not([type]) {
 	border-radius: 2px;
 	border: 1px solid #aaa;
-	font: small-control;
+	font: -webkit-small-control;
 	padding: 3px;
 	width: 120px;
 }
@@ -48,18 +44,29 @@ input:not([type]) {
 }
 
 .close-subpage:hover {
-  background-image: url('/icons/IDR_CLOSE_BAR_H.png');
+	background-image: url('/icons/IDR_CLOSE_BAR_H.png');
 }
 
 @media (prefers-color-scheme: dark) {
 
-    body {
-        background-color:#1c1b22;
-        color: #d8d5d5;
-    }
+	p {
+		margin: 0;
+		font: -webkit-small-control;
+		font-size: 13px;
+		background-color: #484854;
+		border-radius: 2px;
+		padding: 3px;
+	}
 
-	input[type='password'],input[type='text'],
-	input[type='url'],input:not([type]),
+	body {
+		background-color: #1c1b22;
+		color: #d8d5d5;
+	}
+
+	input[type='password'],
+	input[type='text'],
+	input[type='url'],
+	input:not([type]),
 	option:not(:checked) {
 		background: #484854;
 		color: #d8d5d5;

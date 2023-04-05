@@ -26,8 +26,8 @@ function onKeyPress(event) {
 
 function onPaste(event) {
     var value = event.clipboardData.getData("Text");
-	value = value.replace(/[^0-9.,]/g, "");
-	
+    value = value.replace(/[^0-9.,]/g, "");
+
     event.returnValue = false;
     event.target.value = value;
 }
@@ -40,8 +40,8 @@ function addCurrency(init) {
     input_value.value = "loading...";
     input_value.setAttribute("maxlength", 12);
     input_value.addEventListener("keyup", onValueChange, false);
-	input_value.addEventListener("paste", onPaste, false);
-	input_value.onclick = function() { this.setSelectionRange(0, this.value ? this.value.length : 0); }
+    input_value.addEventListener("paste", onPaste, false);
+    input_value.onclick = function () { this.setSelectionRange(0, this.value ? this.value.length : 0); }
     input_value.onkeypress = function () { return onKeyPress(event) };//'onkeypress' is deprecated
     // input_value.addEventListener("keypress", (event) => {return onKeyPress(event)});
 
@@ -78,7 +78,17 @@ function addCurrency(init) {
     var td_img = document.createElement("td");
     td_img.setAttribute("class", "paddingtd");
     td_img.appendChild(img);
-    
+
+    var price_usd = document.createElement('p');
+    price_usd.id = "price_usd" + count_currencies;
+    price_usd.innerHTML = "27700";
+
+
+    var td_price_usd = document.createElement("td");
+    td_price_usd.setAttribute("class", "paddingtd");
+    td_price_usd.appendChild(price_usd);
+
+    tr.appendChild(td_price_usd);
     tr.appendChild(td_img);
     tr.appendChild(td_left);
     tr.appendChild(td_right);
@@ -128,11 +138,8 @@ function update(id) {
 
     if (isNaN(value)) return;
 
-    var img = document.getElementById("icon" + id).src;
-
     localStorage.setItem("last_id", id);
     localStorage.setItem("last_value", value);
-    localStorage.setItem("last_img", img);
 
     var fromSelectCurrency = document.getElementById("currency" + id);
     var fromOptionCurrency =
@@ -146,23 +153,27 @@ function update(id) {
         var to = toOptionCurrency.value;//new cur
 
         var img_element = document.getElementById("icon" + i);
-        if (currenciesJSON[to] == undefined){
+        if (currenciesJSON[to] == undefined) {
             img_element.src = 'https://www.coingecko.com/favicon-16x16.png';
-        }else{
-            if (Object.keys(currenciesJSON[to]).includes('image')){
+        } else {
+            if (Object.keys(currenciesJSON[to]).includes('image')) {
                 img_element.src = currenciesJSON[to].image;
-            }else{
-                console.error("undefined",currenciesJSON[to])
+            } else {
+                console.error("undefined", currenciesJSON[to])
                 img_element.src = 'https://www.coingecko.com/favicon-16x16.png';
             }
         }
+
+        var price_usd_element = document.getElementById("price_usd" + i);
+        var price_in_usd = background_page.get_price_in_usd(to);
+        price_usd_element.innerHTML = `${parseFloat(price_in_usd.toFixed(2))}`;
 
         if (id == i) continue;
         var current_element = document.getElementById("value" + i);
 
 
         if (from == to || value == "") current_element.value = value;
-        else convertValue(current_element, img_element, value, from, to);
+        else convertValue(price_usd_element, current_element, value, from, to);
     }
 }
 
@@ -177,22 +188,23 @@ function setSelectedIndex(s, value) {
     }
 }
 
-function convertValue(element, img_element, value, from, to) {
+function convertValue(price_usd_element, element, value, from, to) {
     document
         .getElementById("loading")
         .setAttribute("style", "visibility:visible;");
     element.value = "loading...";
+    price_usd_element.value = "loading..."
     loading_count++;
 
     background_page.convertValue(value, from, to, function (response) {
         if (response.status == "error") {
-			element.value = "timeout";
-		}
-		else
-		{
-			const precision = response.value > 1000 ? 0 : response.value > 10 ? 2 : response.value > 1 ? 4 : 6;
-			element.value = response.value.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: precision, style: 'currency', currency: to });
-		}
+            element.value = "timeout";
+            price_usd_element.value = "timeout";
+        }
+        else {
+            const precision = response.value > 1000 ? 0 : response.value > 10 ? 2 : response.value > 1 ? 4 : 6;
+            element.value = parseFloat(response.value.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: precision, style: 'currency', currency: to }));
+        }
 
         loading_count--;
 

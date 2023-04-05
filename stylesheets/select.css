@@ -9,7 +9,7 @@ select {
 	background-repeat: no-repeat;
 	border: 1px solid #aaa;
 	color: #555;
-	font: -webkit-small-control;
+	font: small-control;
 	margin: 0;
 	overflow: hidden;
 	padding-top: 2px;

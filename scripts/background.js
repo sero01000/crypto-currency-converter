@@ -7,16 +7,16 @@ var timeout = false;
 refreshRate();
 setInterval(refreshRate, 15 * 60 * 1000);
 
-function round(value, decimal){
-	return Number.parseFloat(value).toFixed(10);
+function round(value, decimal) {
+    return Number.parseFloat(value).toFixed(10);
 }
 
 function refreshRate() {
     var timer = null;
-	var xhrFiat = new XMLHttpRequest();
-	var xhrCrypto = new XMLHttpRequest();
+    var xhrFiat = new XMLHttpRequest();
+    var xhrCrypto = new XMLHttpRequest();
 
-	// Fiat currencies
+    // Fiat currencies
     xhrFiat.open("GET", "https://open.er-api.com/v6/latest/USD", true);
     xhrFiat.onload = function () {
         timeout = false;
@@ -30,23 +30,35 @@ function refreshRate() {
     xhrFiat.send(null);
 
     // Crypto currencies
-	xhrCrypto.open("GET", "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1", true);
-	xhrCrypto.onload = function () {
-		timeout = false;
-		clearTimeout(timer);
-        var response2 = JSON.parse(xhrCrypto.responseText);
-        
-        for (var key in response2) {
-            cache[response2[key]['symbol'].toUpperCase()] = 1 / response2[key]['current_price'];
+    xhrCrypto.open("GET", "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1", true);
+    xhrCrypto.onload = function () {
+        timeout = false;
+        clearTimeout(timer);
+        if (xhrCrypto.readyState === 4) {
+            if (xhrCrypto.status === 200) {
+                var response2 = JSON.parse(xhrCrypto.responseText);
+
+                for (var key in response2) {
+                    cache[response2[key]['symbol'].toUpperCase()] = 1 / response2[key]['current_price'];
+                }
+            } else {
+                console.error(xhrCrypto.statusText);
+            }
         }
-	};
-	xhrCrypto.send(null);
+    };
+    xhrCrypto.send(null);
 
     timer = setTimeout(function () {
         xhrFiat.abort();
         xhrCrypto.abort();
         timeout = true;
     }, 10000);
+}
+
+function get_price_in_usd(to) {
+    var toRate = cache[to];
+    var toUsd = 1 / toRate;
+    return toUsd;
 }
 
 function convertValue(value, from, to, callback) {
@@ -61,6 +73,7 @@ function convertValue(value, from, to, callback) {
 function convertValueRecursive(value, from, to, callback) {
     var fromRate = cache[from];
     var toRate = cache[to];
+    var toUsd = 1 / toRate
 
     if (fromRate == undefined || toRate == undefined) {
         setTimeout(function () {
@@ -71,7 +84,7 @@ function convertValueRecursive(value, from, to, callback) {
 
     clearTimeout(gloabal_timer);
     var converted = round((value / fromRate) * toRate, 6);
-    callback({ status: "success", value: converted });
+    callback({ status: "success", value: converted, toUsd: toUsd });
 }
 
 
