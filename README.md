@@ -2,10 +2,10 @@
 [![Download](https://img.shields.io/badge/Firefox%20Addons-Download-yellow)](https://addons.mozilla.org/ru/firefox/addon/crypto-currency-converter)
 [![Twitter](https://img.shields.io/twitter/url?style=social&url=https://addons.mozilla.org/ru/firefox/addon/crypto-currency-converter)](https://twitter.com/intent/tweet?text=Wow:&url=https://addons.mozilla.org/ru/firefox/addon/crypto-currency-converter)
 
-A Firefox extension for converting multiple crypto and fiat currencies with real-time exchange rates and a minimalistic user interface. Using the open-source APIs provided by [https://exchangerate-api.com/](https://open.er-api.com/)![exc](https://www.exchangerate-api.com/favicon-16x16.png) and [https://api.coingecko.com](https://api.coingecko.com)![coingecko](https://www.coingecko.com/favicon-16x16.png).
+A Firefox extension for converting multiple crypto and fiat currencies with real-time exchange rates and a minimalistic user interface. Using the open-source APIs provided by [https://exchangerate-api.com/](https://open.er-api.com/)![exc](https://www.exchangerate-api.com/favicon-16x16.png) [https://api.coingecko.com](https://api.coingecko.com)![coingecko](https://www.coingecko.com/favicon-16x16.png) and [https://img.icons8.com](https://img.icons8.com)
 
 ## Screenshots:
-![dark](/screens/dark_mode.jpg?raw=true "Dark mode")
+![dark](/screens/dark_mode_0.9.2.jpeg?raw=true "Dark mode")
 ![light](/screens/light_mode.jpg?raw=true "Light mode")
 
 ## Supported fiat currencies:
