@@ -166,7 +166,8 @@ function update(id) {
 
         var price_usd_element = document.getElementById("price_usd" + i);
         var price_in_usd = background_page.get_price_in_usd(to);
-        price_usd_element.innerHTML = `${parseFloat(price_in_usd.toFixed(2))}`;
+        price_usd_element.textContent  = `${parseFloat(price_in_usd.toFixed(2))}`;
+
 
         if (id == i) continue;
         var current_element = document.getElementById("value" + i);
