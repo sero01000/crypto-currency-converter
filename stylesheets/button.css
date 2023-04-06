@@ -1,5 +1,4 @@
-
-input[type='button']{
+input[type='button'] {
   border-radius: 2px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   user-select: none;
@@ -12,21 +11,21 @@ input[type='button']{
   padding: 3px 12px 3px 12px;
 }
 
-input[type='button']:hover{
+input[type='button']:hover {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
   background: #ebebeb linear-gradient(#fefefe, #f8f8f8 40%, #e9e9e9);
   border-color: #999;
   color: #222;
 }
 
-input[type='button']:active{
+input[type='button']:active {
   box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
   background: #ebebeb linear-gradient(#f4f4f4, #efefef 40%, #dcdcdc);
   color: #333;
 }
 
 input[type='button'][disabled],
-input[type='button'][disabled]:hover{
+input[type='button'][disabled]:hover {
   box-shadow: none;
   background: linear-gradient(#fafafa, #f4f4f4 40%, #e5e5e5);
   border-color: #aaa;
@@ -35,7 +34,7 @@ input[type='button'][disabled]:hover{
 
 
 @media (prefers-color-scheme: dark) {
-  input[type='button']{
+  input[type='button'] {
     background: #484854;
     color: var(--button-color);
     appearance: none;
@@ -43,16 +42,16 @@ input[type='button'][disabled]:hover{
     border: none;
   }
 
-  input[type='button']:hover{
+  input[type='button']:hover {
     background: #6b6b7c;
   }
 
-  input[type='button']:active{
+  input[type='button']:active {
     background: #222227;
   }
 
   input[type='button'][disabled],
-  input[type='button'][disabled]:hover{
+  input[type='button'][disabled]:hover {
     background: #222227;
     color: #838383;
   }
